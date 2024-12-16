@@ -14,3 +14,18 @@ export const register = (username, password, email) => {
       : Promise.reject(`Error: ${response.status}`);
   });
 };
+
+export const authorize = (identifier, password) => {
+  return fetch(`${BASE_URL}/auth/local`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ identifier, password }),
+  }).then((response) => {
+    return response.ok
+      ? response.json()
+      : Promise.reject(`Error: ${response.status}`);
+  });
+};
